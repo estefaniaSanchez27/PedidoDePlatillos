@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Registro de datos</title>
+    </h:head>
+    <h:body>
+        <ui:define name="contenido">
+            <h:form id="formulario">
+                <h:outputText value="AGRERAR PLATILLO"/>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Id: "/>
+                    <h:outputText value="#{platilloBean.id}"/>
+                    <h:outputText value="Nombre: "/>
+                    <b:inputText value="#{platilloBean.nombre}" required="true" required-message="Agregar Nombre"/>
+                    <h:outputText value="Costo de Preparacion: "/>
+                    <b:inputText value="#{platilloBean.costoPrep}" required="true" required-message="Agregar Costo"/>
+                </h:panelGrid>
+                <h:panelGrid style="text-align: center">
+                    <b:commandButton value="Agregar Platillo" action="#{platilloBean.guarduar()}" look="success" style-class="btn-lg"/>
+                </h:panelGrid>
+                <h:outputText value="AGRERAR INGREDIENTE"/>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Id: "/>
+                    <h:outputText value="#{ingredienteBean.id}"/>
+                    <h:outputText value="Nombre: "/>
+                    <b:inputText value="#{ingredienteBean.nombre}" required="true" required-message="Agregar Nombre"/>
+                    <h:outputText value="Costo por Gramo: "/>
+                    <b:inputText value="#{ingredienteBean.costoGramo}" required="true" required-message="Agregar Costo"/>
+                </h:panelGrid>
+                <h:panelGrid style="text-align: center">
+                    <b:commandButton value="Agregar Ingrediente" action="#{ingredienteBean.guarduar()}" look="success" style-class="btn-lg"/>
+                </h:panelGrid>
+                <h:outputText value="AGRERAR PERSONA"/>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Id: "/>
+                    <h:outputText value="#{personaBean.id}"/>
+                    <h:outputText value="Nombre: "/>
+                    <b:inputText value="#{personaBean.nombre}" required="true" required-message="Agregar Nombre"/>
+                    <h:outputText value="Telefono: "/>
+                    <b:inputText value="#{personaBean.telefono}" required="true" required-message="Agregar Telefono"/>
+                    <h:outputText value="Direccion: "/>
+                    <b:inputText value="#{personaBean.direccion}" required="true" required-message="Agregar Direccion"/>
+                </h:panelGrid>
+                <h:panelGrid style="text-align: center">
+                    <b:commandButton value="Agregar Persona" action="#{personaBean.guarduar()}" look="success" style-class="btn-lg"/>
+                </h:panelGrid>
+                <h:outputText value="AGRERAR PEDIDO"/>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Id: "/>
+                    <h:outputText value="#{pedidoBean.id}"/>
+                    <h:outputText value="Id Persona: "/>
+                    <b:inputText value="#{pedidoBean.idPersona}" required="true" required-message="Agregar Id del Cliente"/>
+                    <h:outputText value="Fecha: "/>
+                    <b:inputText value="#{pedidoBean.fecha}" required="true" required-message="Agregar Fecha"/>
+                </h:panelGrid>
+                <h:panelGrid style="text-align: center">
+                    <b:commandButton value="Agregar Pedido" action="#{pedidoBean.guarduar()}" look="success" style-class="btn-lg"/>
+                </h:panelGrid>
+                <h:outputText value="AGRERAR INGREDIENTE AL PLATILLO"/>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Id: "/>
+                    <h:outputText value="#{platilloIngredienteBean.id}"/>
+                    <h:outputText value="Id Platillo: "/>
+                    <b:inputText value="#{platilloIngredienteBean.idPlatillo}" required="true" required-message="Agregar id del Platillo"/>
+                    <h:outputText value="Id Ingrediente: "/>
+                    <b:inputText value="#{platilloIngredienteBean.idIngrediente}" required="true" required-message="Agregar id del Ingrediente"/>
+                    <h:outputText value="Gramos: "/>
+                    <b:inputText value="#{platilloIngredienteBean.gramos}" required="true" required-message="Agregar Gramos"/>
+                </h:panelGrid>
+                <h:panelGrid style="text-align: center">
+                    <b:commandButton value="Agregar Ingrediente a un Platillo" action="#{platilloIngredienteBean.guarduar()}" look="success" style-class="btn-lg"/>
+                </h:panelGrid>
+                <h:outputText value="AGRERAR PLATILLO DE UN PEDIDO"/>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Id: "/>
+                    <h:outputText value="#{platilloPedidoBean.id}"/>
+                    <h:outputText value="Id Platillo: "/>
+                    <b:inputText value="#{platilloPedidoBean.idPlatillo}" required="true" required-message="Agregar id del Platillo"/>
+                    <h:outputText value="Id Pedido: "/>
+                    <b:inputText value="#{platilloPedidoBean.idPedido}" required="true" required-message="Agregar id del Pedido"/>
+                    <h:outputText value="Cantidad: "/>
+                    <b:inputText value="#{platilloPedidoBean.cantidad}" required="true" required-message="Cantidad de platillos"/>
+                </h:panelGrid>
+                <h:panelGrid style="text-align: center">
+                    <b:commandButton value="Agregar PlatilloPedido" action="#{platilloPedidoBean.guarduar()}" look="success" style-class="btn-lg"/>
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+    </h:body>
+</html>
+

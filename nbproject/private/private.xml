@@ -2,6 +2,34 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/entities/Pedido.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/controllers/PlatilloPedidoController.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/controllers/PedidoController.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/web/pedido.xhtml</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/entities/Ingrediente.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/entities/Persona.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/controllers/IngredienteController.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/controllers/PersonaController.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/controllers/PlatilloController.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/managedbeans/PlatilloBean.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/entities/Platilloingrediente.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/entities/Platillopedido.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/web/platillopedido.xhtml</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/managedbeans/PersonaBean.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/web/WEB-INF/plantillaboot.xhtml</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/web/ingrediente.xhtml</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/web/platillo.xhtml</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/managedbeans/PedidoBean.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/managedbeans/PlatilloIngredienteBean.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/managedbeans/PlatilloPedidoBean.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/web/platilloingrediente.xhtml</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/alfawareutils/utils/ControllerUtils.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/managedbeans/IngredienteBean.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/controllers/PlatilloIngredienteController.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/entities/Platillo.java</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/web/persona.xhtml</file>
+            <file>file:/C:/Users/ALFA-AS3-1A6600/Documents/NetBeansProjects/PedidoDePlatillosNuevo/src/java/alfaware/pedidodeplatillosnuevo/utils/Conexion.java</file>
+        </group>
     </open-files>
 </project-private>

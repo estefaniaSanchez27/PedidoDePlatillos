@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"      
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Platillo Ingrediente</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./WEB-INF/plantillaboot.xhtml">
+            <ui:define name="contenido">
+                <h:form id="formulario">
+                    <h:panelGrid columns="3" styleClass="col-md-6">
+                        <b:commandButton value="Insertar" action="#{platilloIngredienteBean.guardar()}" look="success"/>
+                        <b:commandButton value="Actualizar" action=" " look="success"/>
+                        <b:commandButton value="Borrar" action=" " look="success"/>
+                    </h:panelGrid>
+                    <br/>
+                    <h:panelGrid columns="3" styleClass="col-md-6">
+                        <b:inputText value="#{platilloIngredienteBean.id}" label="ID:"/>
+                        <b:inputText value="#{platilloIngredienteBean.idIngrediente.id}" label="ID Ingrediente:" required="true" required-message="Agrega ID Ingrediente" />
+                        <b:inputText value="#{platilloIngredienteBean.idPlatillo.id}" label="ID Platillo:" required="true" required-message="Agrega ID Platillo" />
+                        <b:inputText value="#{platilloIngredienteBean.gramos}" label="Gramos:" required="true" required-message="Agregar Gramos" />
+                    </h:panelGrid>
+                </h:form>
+
+                <b:dataTable value="#{platilloIngredienteBean.platilloingredientes}" var="plaing" id="platilloingredientePool" styleClass="table table-striped table-bordered">
+                    <b:dataTableColumn value="#{plaing.id}" label="ID"/>
+                    <b:dataTableColumn value="#{plaing.idIngrediente.id}" label="ID Ingrediente"/>
+                    <b:dataTableColumn value="#{plaing.idPlatillo.id}" label="ID Platillo"/>
+                    <b:dataTableColumn value="#{plaing.gramos}" label="Gramos"/>
+                </b:dataTable>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

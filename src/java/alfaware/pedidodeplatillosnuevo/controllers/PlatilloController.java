@@ -23,5 +23,25 @@ public class PlatilloController extends ControllerUtils {
         Map<String, Object> map = get(pla);
         return map;
     }
+    
+    public void insert(Platillo pla,String nombre,Double costoPrep){
+        pla.setNombre(nombre);
+        pla.setCostoPrep(costoPrep);
+        pla.getId();
+        add(pla);
+    }
+    
+    public void update(Platillo pla,String id,String nombre,Double costoPrep){
+        pla.setId(id);
+        pla.setNombre(nombre);
+        pla.setCostoPrep(costoPrep);
+        modify(pla);
+    }
+    
+    public void delete(Platillo pla,String id){
+        pla.setId(id);
+        remove(pla);
+    }
 }
+
 

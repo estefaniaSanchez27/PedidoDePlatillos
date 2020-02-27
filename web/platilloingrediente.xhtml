@@ -13,22 +13,22 @@
                 <h:form id="formulario">
                     <h:panelGrid columns="3" styleClass="col-md-6">
                         <b:commandButton value="Insertar" action="#{platilloIngredienteBean.guardar()}" look="success"/>
-                        <b:commandButton value="Actualizar" action=" " look="success"/>
-                        <b:commandButton value="Borrar" action=" " look="success"/>
+                        <b:commandButton value="Editar" action="#{platilloIngredienteBean.editar(platilloIngredienteBean)}" look="success"/>
+                        <b:commandButton value="Borrar" action="#{platilloIngredienteBean.eliminar()}" look="success"/>
                     </h:panelGrid>
                     <br/>
                     <h:panelGrid columns="3" styleClass="col-md-6">
                         <b:inputText value="#{platilloIngredienteBean.id}" label="ID:"/>
-                        <b:inputText value="#{platilloIngredienteBean.idIngrediente.id}" label="ID Ingrediente:" required="true" required-message="Agrega ID Ingrediente" />
-                        <b:inputText value="#{platilloIngredienteBean.idPlatillo.id}" label="ID Platillo:" required="true" required-message="Agrega ID Platillo" />
-                        <b:inputText value="#{platilloIngredienteBean.gramos}" label="Gramos:" required="true" required-message="Agregar Gramos" />
+                        <b:inputText value="#{platilloIngredienteBean.idIngrediente}" label="ID Ingrediente:"/>
+                        <b:inputText value="#{platilloIngredienteBean.idPlatillo}" label="ID Platillo:"/>
+                        <b:inputText value="#{platilloIngredienteBean.gramos}" label="Gramos:"/>
                     </h:panelGrid>
                 </h:form>
 
                 <b:dataTable value="#{platilloIngredienteBean.platilloingredientes}" var="plaing" id="platilloingredientePool" styleClass="table table-striped table-bordered">
                     <b:dataTableColumn value="#{plaing.id}" label="ID"/>
-                    <b:dataTableColumn value="#{plaing.idIngrediente.id}" label="ID Ingrediente"/>
-                    <b:dataTableColumn value="#{plaing.idPlatillo.id}" label="ID Platillo"/>
+                    <b:dataTableColumn value="#{plaing.idIngrediente}" label="ID Ingrediente"/>
+                    <b:dataTableColumn value="#{plaing.idPlatillo}" label="ID Platillo"/>
                     <b:dataTableColumn value="#{plaing.gramos}" label="Gramos"/>
                 </b:dataTable>
 

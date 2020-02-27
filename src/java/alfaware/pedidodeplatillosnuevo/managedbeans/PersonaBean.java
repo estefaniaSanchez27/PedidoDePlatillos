@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -30,17 +31,12 @@ public class PersonaBean implements Serializable {
     private String nombre;
     private String telefono;
     private String direccion;
-    private Collection<Pedido> pedidoCollection;
-
     private PersonaController personaController;
     Persona per = new Persona();
 
-    public Collection<Pedido> getPedidoCollection() {
-        return pedidoCollection;
-    }
-
-    public void setPedidoCollection(Collection<Pedido> pedidoCollection) {
-        this.pedidoCollection = pedidoCollection;
+    @PostConstruct
+    public void init() {
+        personaController = new PersonaController();
     }
 
     public String getId() {
@@ -76,26 +72,17 @@ public class PersonaBean implements Serializable {
     }
 
     public String guardar() {
-        per.setNombre(nombre);
-        per.setTelefono(telefono);
-        per.setDireccion(direccion);
-        this.id = per.getId();
-        this.personaController.add(per);
+        this.personaController.insert(per, nombre, telefono, direccion);
         return "persona";
     }
-    
-    public String editar(PersonaBean pb){
-        per.setId(id);
-        per.setNombre(pb.nombre);
-        per.setTelefono(pb.telefono);
-        per.setDireccion(pb.direccion);
-        this.personaController.modify(per);
+
+    public String editar(PersonaBean pb) {
+        this.personaController.update(per, id, pb.nombre, pb.telefono, pb.direccion);
         return "persona";
     }
-    
-    public String eliminar(){
-        per.setId(id);
-        this.personaController.remove(per);
+
+    public String eliminar() {
+        this.personaController.delete(per, id);
         return "persona";
     }
 

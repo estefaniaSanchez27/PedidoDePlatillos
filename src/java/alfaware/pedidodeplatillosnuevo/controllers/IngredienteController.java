@@ -7,6 +7,7 @@ package alfaware.pedidodeplatillosnuevo.controllers;
 
 import alfaware.alfawareutils.utils.ControllerUtils;
 import alfaware.pedidodeplatillosnuevo.entities.Ingrediente;
+import alfaware.pedidodeplatillosnuevo.managedbeans.IngredienteBean;
 import java.util.Map;
 
 /**
@@ -22,6 +23,25 @@ public class IngredienteController extends ControllerUtils {
     public static Map<String, Object> select(Ingrediente ing) {
         Map<String, Object> map = get(ing);
         return map;
+    }
+    
+    public void insert(Ingrediente ing,String nombre,Double costoGramo){
+        ing.setNombre(nombre);
+        ing.setCostoGramo(costoGramo);
+        ing.getId();
+        add(ing);
+    }
+    
+    public void update(Ingrediente ing,String id,String nombre,Double costogramo){
+        ing.setId(id);
+        ing.setNombre(nombre);
+        ing.setCostoGramo(costogramo);
+        modify(ing);
+    }
+    
+    public void delete(Ingrediente ing,String id){
+        ing.setId(id);
+        remove(ing);
     }
 
     /*public List<Ingrediente> get(Ingrediente ingredientes){

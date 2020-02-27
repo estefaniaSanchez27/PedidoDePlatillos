@@ -29,7 +29,7 @@ import javax.faces.bean.ManagedBean;
 public class PedidoBean implements Serializable {
 
     private String id;
-    private Persona idPersona;
+    private String idPersona;
     private String fecha;
     
     //private static ArrayList<Persona> persona = new ArrayList<>();
@@ -39,9 +39,10 @@ public class PedidoBean implements Serializable {
     Pedido pe = new Pedido();
     
     @PostConstruct
-    public void init(){
-        idPersona = new Persona();
+    public void init() {
+        pedidoController = new PedidoController();
     }
+
 
     public String getId() {
         return id;
@@ -51,11 +52,11 @@ public class PedidoBean implements Serializable {
         this.id = id;
     }
 
-    public Persona getIdPersona() {
+    public String getIdPersona() {
         return idPersona;
     }
 
-    public void setIdPersona(Persona idPersona) {
+    public void setIdPersona(String idPersona) {
         this.idPersona = idPersona;
     }
 
@@ -68,10 +69,17 @@ public class PedidoBean implements Serializable {
     }
 
     public String guardar() {
-        pe.setIdPersona(idPersona);
-        pe.setFecha(fecha);
-        this.id = pe.getId();
-        this.pedidoController.add(pe);
+        this.pedidoController.insert(pe, idPersona, fecha);
+        return "pedido";
+    }
+    
+    public String editar(PedidoBean pdb){
+        this.pedidoController.update(pe, id, pdb.idPersona, pdb.fecha);
+        return "pedido";
+    }
+    
+    public String eliminar(){
+        this.pedidoController.delete(pe, id);
         return "pedido";
     }
 
@@ -86,8 +94,7 @@ public class PedidoBean implements Serializable {
      */
     public PedidoBean() {
         
-        //personas = new LinkedList<PersonaBean>();
-        
+        //personas = new LinkedList<PersonaBean>()
         
         
     }

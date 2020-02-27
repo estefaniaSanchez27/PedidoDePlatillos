@@ -13,22 +13,22 @@
                 <h:form id="formulario">
                     <h:panelGrid columns="3" styleClass="col-md-6">
                         <b:commandButton value="Insertar" action="#{platilloPedidoBean.guardar()}" look="success"/>
-                        <b:commandButton value="Actualizar" action=" " look="success"/>
-                        <b:commandButton value="Borrar" action=" " look="success"/>
+                        <b:commandButton value="Editar" action="#{platilloPedidoBean.editar(platilloPedidoBean)}" look="success"/>
+                        <b:commandButton value="Borrar" action="#{platilloPedidoBean.eliminar()}" look="success"/>
                     </h:panelGrid>
                     <br/>
                     <h:panelGrid columns="3" styleClass="col-md-6">
                         <b:inputText value="#{platilloPedidoBean.id}" label="ID:"/>
-                        <b:inputText value="#{platilloPedidoBean.idPlatillo.id}" label="ID Platillo:" required="true" required-message="Agrega ID Platillo" />
-                        <b:inputText value="#{platilloPedidoBean.idPedido.id}" label="ID Pedido:" required="true" required-message="Agrega ID Pedido" />
-                        <b:inputText value="#{platilloPedidoBean.cantidad}" label="Cantidad:" required="true" required-message="Agregar Cantidad" />
+                        <b:inputText value="#{platilloPedidoBean.idPlatillo}" label="ID Platillo:"/>
+                        <b:inputText value="#{platilloPedidoBean.idPedido}" label="ID Pedido:"/>
+                        <b:inputText value="#{platilloPedidoBean.cantidad}" label="Cantidad:" />
                     </h:panelGrid>
                 </h:form>
 
                 <b:dataTable value="#{platilloPedidoBean.platillopedidos}" var="plaped" id="platillopedidoPool" styleClass="table table-striped table-bordered">
                     <b:dataTableColumn value="#{plaped.id}" label="ID"/>
-                    <b:dataTableColumn value="#{plaped.idPlatillo.id}" label="ID Platillo"/>
-                    <b:dataTableColumn value="#{plaped.idPedido.id}" label="ID Pedido"/>
+                    <b:dataTableColumn value="#{plaped.idPlatillo}" label="ID Platillo"/>
+                    <b:dataTableColumn value="#{plaped.idPedido}" label="ID Pedido"/>
                     <b:dataTableColumn value="#{plaped.cantidad}" label="Cantidad"/>
                 </b:dataTable>
 

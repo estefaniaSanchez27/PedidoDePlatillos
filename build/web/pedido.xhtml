@@ -13,20 +13,20 @@
                 <h:form id="formulario">
                     <h:panelGrid columns="3" styleClass="col-md-6">
                         <b:commandButton value="Insertar" action="#{pedidoBean.guardar()}" look="success"/>
-                        <b:commandButton value="Actualizar" action=" " look="success"/>
-                        <b:commandButton value="Borrar" action=" " look="success"/>
+                        <b:commandButton value="Editar" action="#{pedidoBean.editar(pedidoBean)}" look="success"/>
+                        <b:commandButton value="Borrar" action="#{pedidoBean.eliminar()}" look="success"/>
                     </h:panelGrid>
                     <br/>
                     <h:panelGrid columns="3" styleClass="col-md-6">
                         <b:inputText value="#{pedidoBean.id}" label="ID:"/>
-                        <b:inputText value="#{pedidoBean.idPersona.id}" label="ID Persona:" required="true" required-message="Agrega ID" />
-                        <b:dateTimePicker value="#{pedidoBean.fecha}" label="Fecha:" required="true" required-message="Agregar Fecha"/>
+                        <b:inputText value="#{pedidoBean.idPersona}" label="ID Persona:" />
+                        <b:dateTimePicker value="#{pedidoBean.fecha}" label="Fecha:" />
                     </h:panelGrid>
                 </h:form>
 
                 <b:dataTable value="#{pedidoBean.pedidos}" var="pedido" id="PedidoPool" styleClass="table table-striped table-bordered">
                     <b:dataTableColumn value="#{pedido.id}" label="ID"/>
-                    <b:dataTableColumn value="#{pedido.idPersona.id}" label="ID Persona"/>
+                    <b:dataTableColumn value="#{pedido.idPersona}" label="ID Persona"/>
                     <b:dataTableColumn value="#{pedido.fecha}" label="Fecha:"/>
                 </b:dataTable>
 

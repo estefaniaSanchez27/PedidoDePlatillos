@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -30,6 +31,11 @@ public class PlatilloBean implements Serializable {
 
     private PlatilloController platilloController;
     Platillo pl = new Platillo();
+
+    @PostConstruct
+    public void init() {
+        platilloController = new PlatilloController();
+    }
 
     public String getId() {
         return id;
@@ -56,24 +62,17 @@ public class PlatilloBean implements Serializable {
     }
 
     public String guardar() {
-        pl.setNombre(nombre);
-        pl.setCostoPrep(costoPrep);
-        this.id = pl.getId();
-        this.platilloController.add(pl);
+        this.platilloController.insert(pl, nombre, costoPrep);
         return "platillo";
     }
-    
-    public String editar(PlatilloBean plb){
-        pl.setId(id);
-        pl.setNombre(plb.nombre);
-        pl.setCostoPrep(plb.costoPrep);
-        this.platilloController.modify(pl);
+
+    public String editar(PlatilloBean plb) {
+        this.platilloController.update(pl, id, plb.nombre, plb.costoPrep);
         return "platillo";
     }
-    
-    public String eliminar(){
-        pl.setId(id);
-        this.platilloController.remove(pl);
+
+    public String eliminar() {
+        this.platilloController.delete(pl, id);
         return "platillo";
     }
 

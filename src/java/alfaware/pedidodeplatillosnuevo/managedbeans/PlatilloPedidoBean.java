@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -28,12 +29,17 @@ import javax.faces.bean.ManagedBean;
 public class PlatilloPedidoBean implements Serializable {
 
     private String id;
-    private Platillo idPlatillo;
-    private Pedido idPedido;
+    private String idPlatillo;
+    private String idPedido;
     private int cantidad;
 
     private PlatilloPedidoController platillopedidoController;
     Platillopedido pp = new Platillopedido();
+
+    @PostConstruct
+    public void init() {
+        platillopedidoController = new PlatilloPedidoController();
+    }
 
     public String getId() {
         return id;
@@ -43,19 +49,19 @@ public class PlatilloPedidoBean implements Serializable {
         this.id = id;
     }
 
-    public Platillo getIdPlatillo() {
+    public String getIdPlatillo() {
         return idPlatillo;
     }
 
-    public void setIdPlatillo(Platillo idPlatillo) {
+    public void setIdPlatillo(String idPlatillo) {
         this.idPlatillo = idPlatillo;
     }
 
-    public Pedido getIdPedido() {
+    public String getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(Pedido idPedido) {
+    public void setIdPedido(String idPedido) {
         this.idPedido = idPedido;
     }
 
@@ -68,16 +74,22 @@ public class PlatilloPedidoBean implements Serializable {
     }
 
     public String guardar() {
-        pp.setIdPlatillo(idPlatillo);
-        pp.setIdPedido(idPedido);
-        pp.setCantidad(cantidad);
-        this.id = pp.getId();
-        this.platillopedidoController.add(pp);
+        this.platillopedidoController.insert(pp, idPlatillo, idPedido, cantidad);
+        return "platillopedido";
+    }
+
+    public String editar(PlatilloPedidoBean ppb) {
+        this.platillopedidoController.update(pp, id, ppb.idPlatillo, ppb.idPedido, ppb.cantidad);
+        return "platillopedido";
+    }
+    
+    public String eliminar(){
+        this.platillopedidoController.delete(pp, id);
         return "platillopedido";
     }
 
     public List<Platillopedido> getPlatillopedidos() {
-        Map<String, Object> platped = this.platillopedidoController.get(pp);
+        Map<String, Object> platped = this.platillopedidoController.select(pp);
         List<Platillopedido> result = new ArrayList(platped.values());
         return result;
     }

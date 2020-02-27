@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -27,12 +28,17 @@ import javax.faces.bean.ManagedBean;
 public class PlatilloIngredienteBean implements Serializable {
 
     private String id;
-    private Platillo idPlatillo;
-    private Ingrediente idIngrediente;
+    private String idPlatillo;
+    private String idIngrediente;
     private Double gramos;
 
     private PlatilloIngredienteController platilloingredienteController;
     Platilloingrediente pi = new Platilloingrediente();
+
+    @PostConstruct
+    public void init() {
+        platilloingredienteController = new PlatilloIngredienteController();
+    }
 
     public String getId() {
         return id;
@@ -42,19 +48,19 @@ public class PlatilloIngredienteBean implements Serializable {
         this.id = id;
     }
 
-    public Platillo getIdPlatillo() {
+    public String getIdPlatillo() {
         return idPlatillo;
     }
 
-    public void setIdPlatillo(Platillo idPlatillo) {
+    public void setIdPlatillo(String idPlatillo) {
         this.idPlatillo = idPlatillo;
     }
 
-    public Ingrediente getIdIngrediente() {
+    public String getIdIngrediente() {
         return idIngrediente;
     }
 
-    public void setIdIngrediente(Ingrediente idIngrediente) {
+    public void setIdIngrediente(String idIngrediente) {
         this.idIngrediente = idIngrediente;
     }
 
@@ -67,16 +73,22 @@ public class PlatilloIngredienteBean implements Serializable {
     }
 
     public String guardar() {
-        pi.setIdPlatillo(idPlatillo);
-        pi.setIdIngrediente(idIngrediente);
-        pi.setGramos(gramos);
-        this.id = pi.getId();
-        this.platilloingredienteController.add(pi);
+        this.platilloingredienteController.insert(pi, idIngrediente, idPlatillo, gramos);
+        return "platilloingrediente";
+    }
+    
+    public String editar(PlatilloIngredienteBean pib){
+        this.platilloingredienteController.update(pi, id, pib.idIngrediente, pib.idPlatillo, pib.gramos);
+        return "platilloingrediente";
+    }
+    
+    public String eliminar(){
+        this.platilloingredienteController.delete(pi, id);
         return "platilloingrediente";
     }
 
     public List<Platilloingrediente> getPlatilloingredientes() {
-        Map<String, Object> plating = this.platilloingredienteController.get(pi);
+        Map<String, Object> plating = this.platilloingredienteController.select(pi);
         List<Platilloingrediente> result = new ArrayList(plating.values());
         return result;
     }
@@ -88,4 +100,3 @@ public class PlatilloIngredienteBean implements Serializable {
     }
 
 }
-

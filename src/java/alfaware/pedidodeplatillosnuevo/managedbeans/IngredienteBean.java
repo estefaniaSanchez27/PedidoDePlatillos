@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -24,13 +25,18 @@ import javax.faces.bean.ManagedBean;
 @Named(value = "ingredienteBean")
 @SessionScoped
 public class IngredienteBean implements Serializable {
-    
+
     private String id;
     private String nombre;
     private Double costoGramo;
-    
+    //private Ingrediente i;
     private IngredienteController ingredienteController;
+
     Ingrediente i = new Ingrediente();
+    @PostConstruct
+    public void init() {
+        ingredienteController = new IngredienteController();
+    }
 
     public String getId() {
         return id;
@@ -55,44 +61,36 @@ public class IngredienteBean implements Serializable {
     public void setCostoGramo(Double costoGramo) {
         this.costoGramo = costoGramo;
     }
-    
-    public String guardar(){
-        i.setNombre(nombre);
-        i.setCostoGramo(costoGramo);
-        this.id=i.getId();
-        this.ingredienteController.add(i);
+
+    public String guardar() {
+        this.ingredienteController.insert(i, nombre, costoGramo);
+        return "ingrediente";
+
+    }
+
+    public String editar(IngredienteBean ib) {
+        this.ingredienteController.update(i, id, ib.nombre, ib.costoGramo);
         return "ingrediente";
     }
-    
-    public String editar(IngredienteBean ib){
-        i.setId(id);
-        i.setNombre(ib.nombre);
-        i.setCostoGramo(ib.costoGramo);
-        this.ingredienteController.modify(i);
+
+    public String eliminar() {
+        this.ingredienteController.delete(i, id);
         return "ingrediente";
     }
-    
-    public String eliminar(){
-        i.setId(id);
-        this.ingredienteController.remove(i);
-        return "ingrediente";
-    }
-    
-    public List<Ingrediente> getIngredientes(){ 
-        Map<String,Object> ing = this.ingredienteController.select(i);
+
+    public List<Ingrediente> getIngredientes() {
+        Map<String, Object> ing = this.ingredienteController.select(i);
         List<Ingrediente> result = new ArrayList(ing.values());
         return result;
     }
-    
+
     /*public Map<String,Object> getIngredientes(){
         return this.ingredienteController.get(i);
     }*/
-
     /**
      * Creates a new instance of IngredienteBean
      */
     public IngredienteBean() {
     }
-    
-}
 
+}

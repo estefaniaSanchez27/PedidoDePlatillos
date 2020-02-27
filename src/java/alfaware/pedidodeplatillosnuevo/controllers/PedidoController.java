@@ -24,15 +24,33 @@ public class PedidoController extends ControllerUtils {
         Map<String, Object> map = get(ped);
 
         for (Map.Entry<String, Object> entry : map.entrySet()) {
-            Pedido pedido = ((Pedido)entry.getValue());
-            Map<String,Object> m = PersonaController.select(new Persona(String.valueOf(pedido.getIdPersona())));
-            if(!m.isEmpty()){
-                pedido.setIdPersona((Persona)m.get(pedido.getIdPersona()));
+            Pedido pedido = ((Pedido) entry.getValue());
+            Map<String, Object> m = PersonaController.select(new Persona(pedido.getIdPersona()));
+            if (!m.isEmpty()) {
+                pedido.setIdPersona(String.valueOf(m.get(pedido.getIdPersona())));
             }
         }
-        
+
         return map;
     }
 
-}
+    public void insert(Pedido ped, String idPersona, String fecha) {
+        ped.setIdPersona(idPersona);
+        ped.setFecha(fecha);
+        ped.getId();
+        add(ped);
+    }
 
+    public void update(Pedido ped, String id, String idPersona, String fecha) {
+        ped.setId(id);
+        ped.setIdPersona(idPersona);
+        ped.setFecha(fecha);
+        modify(ped);
+    }
+
+    public void delete(Pedido ped, String id) {
+        ped.setId(id);
+        remove(ped);
+    }
+
+}

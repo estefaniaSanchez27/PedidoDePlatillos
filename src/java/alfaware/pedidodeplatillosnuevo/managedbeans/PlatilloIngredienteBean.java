@@ -88,7 +88,7 @@ public class PlatilloIngredienteBean implements Serializable {
     }
 
     public List<Platilloingrediente> getPlatilloingredientes() {
-        Map<String, Object> plating = this.platilloingredienteController.select(pi);
+        Map<String, Object> plating = this.platilloingredienteController.select(new Platilloingrediente());
         List<Platilloingrediente> result = new ArrayList(plating.values());
         return result;
     }

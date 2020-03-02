@@ -10,6 +10,7 @@ import alfaware.pedidodeplatillosnuevo.entities.Ingrediente;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,10 +30,16 @@ public class IngredienteBean implements Serializable {
     private String id;
     private String nombre;
     private Double costoGramo;
+    private boolean disable;
+
     //private Ingrediente i;
     private IngredienteController ingredienteController;
 
     Ingrediente i = new Ingrediente();
+
+    //Map<String, Object> ings = ingredienteController.select(i);
+    private List<Ingrediente> result;
+
     @PostConstruct
     public void init() {
         ingredienteController = new IngredienteController();
@@ -62,25 +69,56 @@ public class IngredienteBean implements Serializable {
         this.costoGramo = costoGramo;
     }
 
+    public boolean isDisable() {
+        return disable;
+    }
+
+    public void setDisable(boolean disable) {
+        this.disable = disable;
+    }
+
     public String guardar() {
-        this.ingredienteController.insert(i, nombre, costoGramo);
+        ingredienteController.insert(i, nombre, costoGramo);
         return "ingrediente";
 
     }
 
     public String editar(IngredienteBean ib) {
-        this.ingredienteController.update(i, id, ib.nombre, ib.costoGramo);
+        //Ingrediente iu = new Ingrediente();
+        ingredienteController.update(i, id, ib.nombre, ib.costoGramo);
+        //Map<String,Object> map = ingredienteController.select(iu);
+        //result = new ArrayList(map.values());
+        this.getIngredientes();
         return "ingrediente";
     }
 
     public String eliminar() {
-        this.ingredienteController.delete(i, id);
+        ingredienteController.delete(i, id);
         return "ingrediente";
     }
 
+    public String limpiar() {
+        this.setNombre(null);
+        this.setCostoGramo(null);
+        return "ingrediente";
+    }
+
+    public void onSelect(Ingrediente ing) {
+        this.id = ing.getId();
+        this.nombre = ing.getNombre();
+        this.costoGramo = ing.getCostoGramo();
+        this.disable = true;
+    }
+
+    public void onDeselect() {
+        this.nombre = null;
+        this.costoGramo = null;
+        this.disable = false;
+    }
+
     public List<Ingrediente> getIngredientes() {
-        Map<String, Object> ing = this.ingredienteController.select(i);
-        List<Ingrediente> result = new ArrayList(ing.values());
+        Map<String, Object> ings = ingredienteController.select(new Ingrediente());
+        result = new ArrayList(ings.values());
         return result;
     }
 
@@ -91,6 +129,7 @@ public class IngredienteBean implements Serializable {
      * Creates a new instance of IngredienteBean
      */
     public IngredienteBean() {
+        this.disable = false;
     }
 
 }

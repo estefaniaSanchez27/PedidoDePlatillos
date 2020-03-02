@@ -77,7 +77,7 @@ public class PlatilloBean implements Serializable {
     }
 
     public List<Platillo> getPlatillos() {
-        Map<String, Object> plat = this.platilloController.select(pl);
+        Map<String, Object> plat = this.platilloController.select(new Platillo());
         List<Platillo> result = new ArrayList(plat.values());
         return result;
     }

@@ -8,6 +8,8 @@ package alfaware.pedidodeplatillosnuevo.controllers;
 import alfaware.alfawareutils.utils.ControllerUtils;
 import alfaware.pedidodeplatillosnuevo.entities.Ingrediente;
 import alfaware.pedidodeplatillosnuevo.managedbeans.IngredienteBean;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,7 +17,6 @@ import java.util.Map;
  * @author ALFA-AS3-1A6600
  */
 public class IngredienteController extends ControllerUtils {
-
     public IngredienteController() {
         super();
     }
@@ -30,6 +31,7 @@ public class IngredienteController extends ControllerUtils {
         ing.setCostoGramo(costoGramo);
         ing.getId();
         add(ing);
+
     }
     
     public void update(Ingrediente ing,String id,String nombre,Double costogramo){

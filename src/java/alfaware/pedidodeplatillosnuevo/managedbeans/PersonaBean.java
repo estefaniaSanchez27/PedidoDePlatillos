@@ -87,7 +87,7 @@ public class PersonaBean implements Serializable {
     }
 
     public List<Persona> getPersonas() {
-        Map<String, Object> pers = this.personaController.select(per);
+        Map<String, Object> pers = this.personaController.select(new Persona());
         List<Persona> result = new ArrayList(pers.values());
         return result;
     }

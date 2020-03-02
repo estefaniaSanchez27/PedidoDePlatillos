@@ -89,7 +89,7 @@ public class PlatilloPedidoBean implements Serializable {
     }
 
     public List<Platillopedido> getPlatillopedidos() {
-        Map<String, Object> platped = this.platillopedidoController.select(pp);
+        Map<String, Object> platped = this.platillopedidoController.select(new Platillopedido());
         List<Platillopedido> result = new ArrayList(platped.values());
         return result;
     }

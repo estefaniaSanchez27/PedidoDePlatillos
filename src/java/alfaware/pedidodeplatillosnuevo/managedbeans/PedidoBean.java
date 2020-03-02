@@ -31,6 +31,7 @@ public class PedidoBean implements Serializable {
     private String id;
     private String idPersona;
     private String fecha;
+    private boolean disable;
     
     //private static ArrayList<Persona> persona = new ArrayList<>();
 
@@ -68,6 +69,14 @@ public class PedidoBean implements Serializable {
         this.fecha = fecha;
     }
 
+    public boolean isDisable() {
+        return disable;
+    }
+
+    public void setDisable(boolean disable) {
+        this.disable = disable;
+    }
+
     public String guardar() {
         this.pedidoController.insert(pe, idPersona, fecha);
         return "pedido";
@@ -84,10 +93,20 @@ public class PedidoBean implements Serializable {
     }
 
     public List<Pedido> getPedidos() {
-        Map<String, Object> ped = this.pedidoController.select(pe);
+        Map<String, Object> ped = this.pedidoController.select(new Pedido());
         List<Pedido> result = new ArrayList(ped.values());
         return result;
     }
+    
+    /*public String Limpiar(){
+        this.setIdPersona(null);
+        this.setFecha(null);
+        return "ingrediente";
+    }*/
+    
+    /*public void onSelect(In){
+    
+    }*/
 
     /**
      * Creates a new instance of PedidoBean

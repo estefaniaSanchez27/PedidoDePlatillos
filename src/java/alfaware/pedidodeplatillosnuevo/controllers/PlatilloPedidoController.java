@@ -9,6 +9,7 @@ import alfaware.alfawareutils.utils.ControllerUtils;
 import alfaware.pedidodeplatillosnuevo.entities.Pedido;
 import alfaware.pedidodeplatillosnuevo.entities.Platillo;
 import alfaware.pedidodeplatillosnuevo.entities.Platillopedido;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -36,26 +37,53 @@ public class PlatilloPedidoController extends ControllerUtils {
 
         return map;
     }
-    
-    public void insert(Platillopedido plaped,String idPlatillo,String idPedido,int cantidad){
+
+    public void insert(Platillopedido plaped, String idPlatillo, String idPedido, int cantidad) {
         plaped.setIdPlatillo(idPlatillo);
         plaped.setIdPedido(idPedido);
         plaped.setCantidad(cantidad);
         plaped.getId();
         add(plaped);
     }
-    
-    public void update(Platillopedido plaped,String id,String idPlatillo,String idPedido,int cantidad){
+
+    public void update(Platillopedido plaped, String id, String idPlatillo, String idPedido, int cantidad) {
         plaped.setId(id);
         plaped.setIdPlatillo(idPlatillo);
         plaped.setIdPedido(idPedido);
         plaped.setCantidad(cantidad);
         modify(plaped);
     }
-    
-    public void delete(Platillopedido plaped,String id){
-        plaped.setId(id);
-        remove(plaped);
+
+    public void delete(Platillo p, String idPedido, Platillopedido plaped) {
+        String idPlatillo = p.getId();
+        Map<String, Object> platillospedido = select(plaped);
+        for (Map.Entry<String, Object> entry : platillospedido.entrySet()) {
+            Platillopedido platilloped = ((Platillopedido) entry.getValue());
+            if (idPedido == null ? platilloped.getIdPedido() == null : idPedido.equals(platilloped.getIdPedido())) {
+                if (idPlatillo == null ? platilloped.getIdPlatillo() == null : idPlatillo.equals(platilloped.getIdPlatillo())) {
+                    String id = platilloped.getId();
+                    plaped.setId(id);
+                    remove(plaped);
+                }
+            }
+        }
+    }
+
+    public static Map<String, Object> obtenerPlatillosPedido(Pedido ped, Platillo pla, Platillopedido plaped, String id) {
+        ped.setId(id);
+        Map<String, Object> platillospedido = select(plaped);
+        Map<String, Object> platillos = get(pla);
+        Map<String, Object> map = new HashMap<>();
+        for (Map.Entry<String, Object> entry : platillospedido.entrySet()) {
+            Platillopedido platilloped = ((Platillopedido) entry.getValue());
+            if (id == null ? platilloped.getIdPedido() == null : id.equals(platilloped.getIdPedido())) {
+                if (platillos.containsKey(platilloped.getIdPlatillo())) {
+                    Map<String, Object> p = PlatilloController.select(new Platillo(platilloped.getIdPlatillo()));
+                    map.putAll(p);
+                }
+            }
+        }
+        return map;
     }
 
 }

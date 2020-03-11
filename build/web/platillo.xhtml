@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"      
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Platillo</title>
     </h:head>
@@ -11,20 +12,43 @@
         <ui:composition template="./WEB-INF/plantillaboot.xhtml">
             <ui:define name="contenido">
                 <h:form id="formulario">
-                    <h:panelGrid columns="3" styleClass="col-md-6">
-                        <b:commandButton value="Insertar" action="#{platilloBean.guardar()}" look="success"/>
-                        <b:commandButton value="Actualizar" action="#{platilloBean.editar(platilloBean)}" look="success"/>
-                        <b:commandButton value="Borrar" action="#{platilloBean.eliminar()}" look="success"/>
+                    <h:panelGrid columns="4" styleClass="col-md-6">
+                        <b:commandButton value="Guardar" action="#{platilloBean.guarduar(platilloBean)}" look="success"/>
+                        <b:commandButton value="Borrar" action="#{platilloBean.eliminar()}" look="success" disabled="#{!(platilloBean.disable)}"/>
+                        <b:commandButton value="Limpiar" action="#{platilloBean.limpiar()}" look="success"/>
                     </h:panelGrid>
                     <br/>
                     <h:panelGrid columns="3" styleClass="col-md-6">
-                        <b:inputText value="#{platilloBean.id}" label="ID:"/>
                         <b:inputText value="#{platilloBean.nombre}" label="Nombre:"/>
-                        <b:inputText value="#{platilloBean.costoPrep}" label="Costo Prep:"  />
+                        <b:inputText value="#{platilloBean.costoPrep}" label="Costo Prep:"/>
+                        <b:modal title="Ingrediente de #{platilloBean.nombre}" styleClass="responsiveModalPseudoClass"
+                                 closable="true" closeOnEscape="true" id="resposiveModal" auto-update="false" size="xl">
+                            <b:panelGrid columns="2">
+                                <b:dataTable value="#{platilloBean.ingreDispo}" var="ingrediente" id="ingdisponibles" select="true"
+                                             selection-mode="simple" onselect="ajax:platilloBean.insertarIngredienteaPlatillo(ingrediente);" 
+                                             update="ingagregados,ingdisponibles">
+                                    <b:dataTableColumn value="#{ingrediente.nombre}" label="Disponibles"/>
+                                </b:dataTable>
+                                <b:dataTable value="#{platilloBean.ingrePla}" var="plaing" id="ingagregados"
+                                             styleClass="table table-striped table-bordered" select="true" selection-mode="simple"
+                                             onselect="ajax:platilloBean.eliminarIngredienteaPlatillo(plaing);" update="ingagregados">
+                                    <b:dataTableColumn value="#{plaing.nombre}" label="Agregados"/>
+                                </b:dataTable>
+                            </b:panelGrid>
+                            <f:facet name="footer">
+                                <b:button value="Close" dismiss="modal"/>
+                                <b:button value="Okey" look="primary" dismiss="modal"/>
+                            </f:facet>
+                        </b:modal>
+                        <b:button value="Ingredientes" look="success" 
+                                  onclick="$('.responsiveModalPseudoClass').modal();tableWidgetVar.DataTable().responsive.recalc();"  disabled="#{!(platilloBean.disable)}"/>
                     </h:panelGrid>
                 </h:form>
 
-                <b:dataTable value="#{platilloBean.platillos}" var="platillo" id="platillo" styleClass="table table-striped table-bordered">
+                <b:dataTable value="#{platilloBean.platillos}" var="platillo" id="platillo" styleClass="table table-striped table-bordered"
+                             select="true" selection-mode="simple"
+                             onselect="ajax:platilloBean.onSelect(platillo);" 
+                             ondeselect="ajax:platilloBean.onDeselect();" update="formulario">
                     <b:dataTableColumn value="#{platillo.id}" label="ID"/>
                     <b:dataTableColumn value="#{platillo.nombre}" label="Nombre"/>
                     <b:dataTableColumn value="#{platillo.costoPrep}" label="Costo Prep"/>

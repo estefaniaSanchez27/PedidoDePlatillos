@@ -77,7 +77,7 @@ public class IngredienteBean implements Serializable {
         this.disable = disable;
     }
 
-    public String guardar() {
+    /*public String guardar() {
         ingredienteController.insert(i, nombre, costoGramo);
         return "ingrediente";
 
@@ -90,6 +90,15 @@ public class IngredienteBean implements Serializable {
         //result = new ArrayList(map.values());
         this.getIngredientes();
         return "ingrediente";
+    }*/
+    public String guarduar(IngredienteBean ib) {
+        if (this.disable == true) {
+            this.ingredienteController.update(i, id, ib.nombre, ib.costoGramo);
+            return "ingrediente";
+        } else {
+            this.ingredienteController.insert(i, nombre, costoGramo);
+            return "ingrediente";
+        }
     }
 
     public String eliminar() {
@@ -100,6 +109,7 @@ public class IngredienteBean implements Serializable {
     public String limpiar() {
         this.setNombre(null);
         this.setCostoGramo(null);
+        this.disable = false;
         return "ingrediente";
     }
 

@@ -31,6 +31,7 @@ public class PersonaBean implements Serializable {
     private String nombre;
     private String telefono;
     private String direccion;
+    private boolean disable;
     private PersonaController personaController;
     Persona per = new Persona();
 
@@ -71,7 +72,16 @@ public class PersonaBean implements Serializable {
         this.direccion = direccion;
     }
 
-    public String guardar() {
+    public boolean isDisable() {
+        return disable;
+    }
+
+    public void setDisable(boolean disable) {
+        this.disable = disable;
+    }
+
+
+    /*public String guardar() {
         this.personaController.insert(per, nombre, telefono, direccion);
         return "persona";
     }
@@ -79,6 +89,15 @@ public class PersonaBean implements Serializable {
     public String editar(PersonaBean pb) {
         this.personaController.update(per, id, pb.nombre, pb.telefono, pb.direccion);
         return "persona";
+    }*/
+    public String guarduar(PersonaBean pb) {
+        if (this.disable == true) {
+            this.personaController.update(per, id, pb.nombre, pb.telefono, pb.direccion);
+            return "persona";
+        } else {
+            this.personaController.insert(per, nombre, telefono, direccion);
+            return "persona";
+        }
     }
 
     public String eliminar() {
@@ -92,10 +111,34 @@ public class PersonaBean implements Serializable {
         return result;
     }
 
+    public String limpiar() {
+        this.nombre = null;
+        this.telefono = null;
+        this.direccion = null;
+        this.disable = false;
+        return "persona";
+    }
+
+    public void onSelect(Persona per) {
+        this.id = per.getId();
+        this.nombre = per.getNombre();
+        this.telefono = per.getTelefono();
+        this.direccion = per.getDireccion();
+        this.disable = true;
+    }
+
+    public void onDeselect() {
+        this.nombre = null;
+        this.telefono = null;
+        this.direccion = null;
+        this.disable = false;
+    }
+
     /**
      * Creates a new instance of PersonaBean
      */
     public PersonaBean() {
+        this.disable = false;
     }
 
 }

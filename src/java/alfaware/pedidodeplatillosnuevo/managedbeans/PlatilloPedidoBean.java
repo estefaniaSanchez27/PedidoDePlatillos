@@ -82,12 +82,11 @@ public class PlatilloPedidoBean implements Serializable {
         this.platillopedidoController.update(pp, id, ppb.idPlatillo, ppb.idPedido, ppb.cantidad);
         return "platillopedido";
     }
-    
-    public String eliminar(){
+
+    /*public String eliminar(){
         this.platillopedidoController.delete(pp, id);
         return "platillopedido";
-    }
-
+    }*/
     public List<Platillopedido> getPlatillopedidos() {
         Map<String, Object> platped = this.platillopedidoController.select(new Platillopedido());
         List<Platillopedido> result = new ArrayList(platped.values());

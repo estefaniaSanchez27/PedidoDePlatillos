@@ -12,20 +12,22 @@
             <ui:define name="contenido">
                 <h:form id="formulario">
                     <h:panelGrid columns="3" styleClass="col-md-6">
-                        <b:commandButton value="Insertar" action="#{personaBean.guardar()}" look="success"/>
-                        <b:commandButton value="Actualizar" action="#{personaBean.editar(personaBean)}" look="success"/>
-                        <b:commandButton value="Borrar" action="#{personaBean.eliminar()}" look="success"/>
+                        <b:commandButton value="Guardar" action="#{personaBean.guarduar(personaBean)}" look="success"/>
+                        <b:commandButton value="Borrar" action="#{personaBean.eliminar()}" look="success" disabled="#{!(personaBean.disable)}"/>
+                        <b:commandButton value="Limpiar" action="#{personaBean.limpiar()}" look="success"/>
                     </h:panelGrid>
                     <br/>
                     <h:panelGrid columns="3" styleClass="col-md-6">
-                        <b:inputText value="#{personaBean.id}" label="ID:"/>
                         <b:inputText value="#{personaBean.nombre}" label="Nombre:" />
                         <b:inputText value="#{personaBean.telefono}" label="Telefono:"/>
                         <b:inputText value="#{personaBean.direccion}" label="Direccion:"/>
                     </h:panelGrid>
                 </h:form>
 
-                <b:dataTable value="#{personaBean.personas}" var="persona" id="personasPool" styleClass="table table-striped table-bordered">
+                <b:dataTable value="#{personaBean.personas}" var="persona" id="personasPool" styleClass="table table-striped table-bordered"
+                             select="true" selection-mode="simple"
+                             onselect="ajax:personaBean.onSelect(persona)" 
+                             ondeselect="ajax:personaBean.onDeselect();" update="formulario">
                     <b:dataTableColumn value="#{persona.id}" label="ID"/>
                     <b:dataTableColumn value="#{persona.nombre}" label="Nombre"/>
                     <b:dataTableColumn value="#{persona.telefono}" label="Telefono"/>

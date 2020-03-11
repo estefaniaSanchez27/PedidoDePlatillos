@@ -11,9 +11,8 @@
         <ui:composition template="./WEB-INF/plantillaboot.xhtml">
             <ui:define name="contenido">
                 <h:form id="formulario">
-                    <h:panelGrid columns="4" styleClass="col-md-6">
-                        <b:commandButton value="Insertar" action="#{ingredienteBean.guardar()}" look="success" disabled="#{ingredienteBean.disable}"/>
-                        <b:commandButton value="Editar" action="#{ingredienteBean.editar(ingredienteBean)}" look="success" disabled="#{!(ingredienteBean.disable)}"/>
+                    <h:panelGrid columns="3" styleClass="col-md-6">
+                        <b:commandButton value="Guardar" action="#{ingredienteBean.guarduar(ingredienteBean)}" look="success"/>
                         <b:commandButton value="Borrar" action="#{ingredienteBean.eliminar()}" look="success" disabled="#{!(ingredienteBean.disable)}"/>
                         <b:commandButton value="Limpiar" action="#{ingredienteBean.limpiar()}" look="success"/>
                     </h:panelGrid>

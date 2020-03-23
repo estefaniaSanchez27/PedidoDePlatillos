@@ -11,28 +11,57 @@
         <ui:composition template="./WEB-INF/plantillaboot.xhtml">
             <ui:define name="contenido">
                 <h:form id="formulario">
-                    <h:panelGrid columns="3" styleClass="col-md-6">
-                        <b:commandButton value="Guardar" action="#{personaBean.guarduar(personaBean)}" look="success"/>
-                        <b:commandButton value="Borrar" action="#{personaBean.eliminar()}" look="success" disabled="#{!(personaBean.disable)}"/>
-                        <b:commandButton value="Limpiar" action="#{personaBean.limpiar()}" look="success"/>
-                    </h:panelGrid>
-                    <br/>
-                    <h:panelGrid columns="3" styleClass="col-md-6">
-                        <b:inputText value="#{personaBean.nombre}" label="Nombre:" />
-                        <b:inputText value="#{personaBean.telefono}" label="Telefono:"/>
-                        <b:inputText value="#{personaBean.direccion}" label="Direccion:"/>
+                    <h:panelGrid columns="1" cellpadding="10" cellspacing="1">
+                        <b:buttonToolbar id="botones">
+                            <b:buttonGroup>
+                                <b:commandButton value="Guardar" action="#{personaBean.guarduar(personaBean)}" look="success"/>
+                            </b:buttonGroup>
+                            <b:buttonGroup>
+                                <b:commandButton value="Borrar" action="#{personaBean.eliminar()}" look="danger" disabled="#{!(personaBean.disable)}"/>
+                            </b:buttonGroup>
+                            <b:buttonGroup>
+                                <b:commandButton value="Limpiar" action="#{personaBean.limpiar()}" style="width:80px"/>
+                            </b:buttonGroup>
+                        </b:buttonToolbar>
+                        <br/>
+                        <h:panelGrid id="panelinput" columns="6">
+                            <b:row>
+                                <b:column medium-screen="1">
+                                    <h:outputText value="Nombre: "/>
+                                </b:column>
+                                <b:column medium-screen="3">
+                                    <b:inputText value="#{personaBean.nombre}" placeholder="NOMBRE" fieldSize="sm"/>
+                                </b:column>
+                                <b:column medium-screen="1">
+                                    <h:outputText value="Telefono: "/>
+                                </b:column>
+                                <b:column medium-screen="3">
+                                    <b:inputText value="#{personaBean.telefono}"  placeholder="TELEFONO" fieldSize="sm"/>
+                                </b:column>
+                                <b:column medium-screen="1">
+                                    <h:outputText value="Direccion: "/>
+                                </b:column>
+                                <b:column medium-screen="3">
+                                    <b:inputText value="#{personaBean.direccion}"  placeholder="DIRECCION" fieldSize="sm"/>
+                                </b:column>
+                            </b:row>
+                        </h:panelGrid>
+                        <br/>
+                        <h:panelGrid styleClass="container">
+                            <b:dataTable value="#{personaBean.personas}" var="persona" id="personasPool" styleClass="table table-striped table-bordered"
+                                         select="true" selection-mode="simple"
+                                         onselect="ajax:personaBean.onSelect(persona)" 
+                                         ondeselect="ajax:personaBean.onDeselect();" update="botones,panelinput">
+                                <b:dataTableColumn value="#{persona.id}" label="ID"/>
+                                <b:dataTableColumn value="#{persona.nombre}" label="Nombre"/>
+                                <b:dataTableColumn value="#{persona.telefono}" label="Telefono"/>
+                                <b:dataTableColumn value="#{persona.direccion}" label="Direccion"/>
+                            </b:dataTable>
+                        </h:panelGrid>
                     </h:panelGrid>
                 </h:form>
 
-                <b:dataTable value="#{personaBean.personas}" var="persona" id="personasPool" styleClass="table table-striped table-bordered"
-                             select="true" selection-mode="simple"
-                             onselect="ajax:personaBean.onSelect(persona)" 
-                             ondeselect="ajax:personaBean.onDeselect();" update="formulario">
-                    <b:dataTableColumn value="#{persona.id}" label="ID"/>
-                    <b:dataTableColumn value="#{persona.nombre}" label="Nombre"/>
-                    <b:dataTableColumn value="#{persona.telefono}" label="Telefono"/>
-                    <b:dataTableColumn value="#{persona.direccion}" label="Direccion"/>
-                </b:dataTable>
+
 
             </ui:define>
         </ui:composition>

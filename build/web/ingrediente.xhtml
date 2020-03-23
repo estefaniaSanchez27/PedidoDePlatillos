@@ -11,27 +11,48 @@
         <ui:composition template="./WEB-INF/plantillaboot.xhtml">
             <ui:define name="contenido">
                 <h:form id="formulario">
-                    <h:panelGrid columns="3" styleClass="col-md-6">
-                        <b:commandButton value="Guardar" action="#{ingredienteBean.guarduar(ingredienteBean)}" look="success"/>
-                        <b:commandButton value="Borrar" action="#{ingredienteBean.eliminar()}" look="success" disabled="#{!(ingredienteBean.disable)}"/>
-                        <b:commandButton value="Limpiar" action="#{ingredienteBean.limpiar()}" look="success"/>
-                    </h:panelGrid>
-                    <br/>
-                    <h:panelGrid columns="3" styleClass="col-md-6">
-                        <b:inputText value="#{ingredienteBean.nombre}" label="Nombre:" />
-                        <b:inputText value="#{ingredienteBean.costoGramo}" label="Costo/Gramo:"  />
+                    <h:panelGrid columns="1" cellpadding="10" cellspacing="1">
+                        <b:buttonToolbar id="botones">
+                            <b:buttonGroup>
+                                <b:commandButton value="Guardar" action="#{ingredienteBean.guarduar(ingredienteBean)}" look="success"/>
+                            </b:buttonGroup>
+                            <b:buttonGroup>
+                                <b:commandButton value="Borrar" action="#{ingredienteBean.eliminar()}" look="danger" disabled="#{!(ingredienteBean.disable)}"/>
+                            </b:buttonGroup>
+                            <b:buttonGroup>
+                                <b:commandButton value="Limpiar" action="#{ingredienteBean.limpiar()}"  style="width:80px"/>
+                            </b:buttonGroup>
+                        </b:buttonToolbar>
+                        <br/>
+                        <h:panelGrid id="panelinput" columns="4">
+                            <b:row>
+                                <b:column medium-screen="2">
+                                    <h:outputText value="Nombre:"/>
+                                </b:column>
+                                <b:column medium-screen="4">
+                                    <b:inputText value="#{ingredienteBean.nombre}" placeholder="NOMBRE" fieldSize="sm"/>
+                                </b:column>
+                                <b:column medium-screen="2">
+                                    <h:outputText value="Costo/Gramo: "/>
+                                </b:column>
+                                <b:column medium-screen="4">
+                                    <b:inputText value="#{ingredienteBean.costoGramo}" placeholder="COSTO/GRAMO" fieldSize="sm"/>
+                                </b:column>
+                            </b:row>
+                        </h:panelGrid>
+                        <br/>
+                        <h:panelGrid styleClass="container">
+                            <b:dataTable value="#{ingredienteBean.ingredientes}" var="ingrediente" id="ingredientesPool" 
+                                         select="true" selection-mode="simple"
+                                         onselect="ajax:ingredienteBean.onSelect(ingrediente);" 
+                                         ondeselect="ajax:ingredienteBean.onDeselect();" update="botones,panelinput">
+                                <b:dataTableColumn value="#{ingrediente.id}" label="ID"/>
+                                <b:dataTableColumn value="#{ingrediente.nombre}" label="Nombre"/>
+                                <b:dataTableColumn value="#{ingrediente.costoGramo}" label="Costo"/>
+                            </b:dataTable>
+                        </h:panelGrid>
                     </h:panelGrid>
                 </h:form>
-
-                <b:dataTable value="#{ingredienteBean.ingredientes}" var="ingrediente" id="ingredientesPool" 
-                             styleClass="table table-striped table-bordered" select="true" selection-mode="simple"
-                             onselect="ajax:ingredienteBean.onSelect(ingrediente);" 
-                             ondeselect="ajax:ingredienteBean.onDeselect();" update="formulario">
-                    <b:dataTableColumn value="#{ingrediente.id}" label="ID"/>
-                    <b:dataTableColumn value="#{ingrediente.nombre}" label="Nombre"/>
-                    <b:dataTableColumn value="#{ingrediente.costoGramo}" label="Costo"/>
-                </b:dataTable>
-
             </ui:define> 
         </ui:composition>
     </h:body>

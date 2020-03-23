@@ -12,48 +12,73 @@
         <ui:composition template="./WEB-INF/plantillaboot.xhtml">
             <ui:define name="contenido">
                 <h:form id="formulario">
-                    <h:panelGrid columns="3" styleClass="col-md-6">
-                        <b:commandButton value="Guardar" action="#{pedidoBean.guarduar(pedidoBean)}" look="success"/>
-                        <b:commandButton value="Borrar" action="#{pedidoBean.eliminar()}" look="success" disabled="#{!(pedidoBean.disable)}"/>
-                        <b:commandButton value="Limpiar" action="#{pedidoBean.limpiar()}" look="success"/>
-                    </h:panelGrid>
-                    <br/>
-                    <h:panelGrid columns="3" styleClass="col-md-6">
-                        <b:inputText label="ID Persona" value="#{pedidoBean.idPersona}"/>
-                        <b:dateTimePicker value="#{pedidoBean.fecha}" label="Fecha:" />
-                        <b:modal title="Platillos del pedido #{pedidoBean.id}" styleClass="responsiveModalPseudoClass"
-                                 closable="true" closeOnEscape="true" id="resposiveModal" auto-update="false" size="xl">
-                            <b:panelGrid columns="2">
-                                <b:dataTable value="#{pedidoBean.plaDispo}" var="platillo" id="pladisponibles" select="true"
-                                             selection-mode="simple" onselect="ajax:pedidoBean.insertarPlatilloaPedido(platillo);" 
-                                             update="plaagregados,pladisponibles">
-                                    <b:dataTableColumn value="#{platillo.nombre}" label="Disponibles"/>
-                                </b:dataTable>
-                                <b:dataTable value="#{pedidoBean.plaAgregados}" var="plaped" id="plaagregados"
-                                             styleClass="table table-striped table-bordered" select="true" selection-mode="simple"
-                                             onselect="ajax:pedidoBean.eliminarPlatilloaPedido(plaped)" update="plaagregados">
-                                    <b:dataTableColumn value="#{plaped.nombre}" label="Agregados"/>
-                                </b:dataTable>
-                            </b:panelGrid>
-                            <f:facet name="footer">
-                                <b:button value="Close" dismiss="modal"/>
-                                <b:button value="Okey" look="primary" dismiss="modal"/>
-                            </f:facet>
-                        </b:modal>
-                        <b:button value="Platillos" look="success" 
-                                  onclick="$('.responsiveModalPseudoClass').modal();tableWidgetVar.DataTable().responsive.recalc();"  disabled="#{!(pedidoBean.disable)}"/>
+                    <h:panelGrid columns="1" cellpadding="10" cellspacing="1">
+                        <b:buttonToolbar id="botones">
+                            <b:buttonGroup>
+                                <b:commandButton value="Guardar" action="#{pedidoBean.guarduar(pedidoBean)}" look="success"/>
+                            </b:buttonGroup>
+                            <b:buttonGroup>
+                                <b:commandButton value="Borrar" action="#{pedidoBean.eliminar()}" look="danger" disabled="#{!(pedidoBean.disable)}"/>
+                            </b:buttonGroup>
+                            <b:buttonGroup>
+                                <b:commandButton value="Limpiar" action="#{pedidoBean.limpiar()}" style="width:80px" />
+                            </b:buttonGroup>
+                        </b:buttonToolbar>
+                        <br/>
+                        <h:panelGrid id="panelinput" columns="5">
+                            <b:row>
+                                <b:column medium-screen="2">
+                                    <h:outputText value="ID Persona:"/>
+                                </b:column>
+                                <b:column medium-screen="4">
+                                    <b:inputText value="#{pedidoBean.idPersona}" placeholder="IDPERSONA" fieldSize="sm"/>
+                                </b:column>
+                                <b:column medium-screen="1">
+                                    <h:outputText value="Fecha:"/>
+                                </b:column>
+                                <b:column medium-screen="4">
+                                    <b:dateTimePicker value="#{pedidoBean.fecha}" placeholder="FECHA" fieldSize="sm"/>
+                                </b:column>
+                                <b:column medium-screen="1">
+                                    <b:button value="Platillos" look="primary" 
+                                              onclick="$('.modalPseudoClass').modal();tableWidgetVar.DataTable().responsive.recalc();"  
+                                              disabled="#{!(pedidoBean.disable)}"/>
+                                </b:column>
+                            </b:row>
+                            <b:modal title="Platillos del pedido #{pedidoBean.id}" styleClass="modalPseudoClass"
+                                     closable="true" closeOnEscape="true" id="resposiveModal" auto-update="false" size="modal-lg">
+                                <b:panelGrid columns="2">
+                                    <b:dataTable value="#{pedidoBean.plaDispo}" var="platillo" id="pladisponibles" select="true"
+                                                 selection-mode="simple" onselect="ajax:pedidoBean.insertarPlatilloaPedido(platillo);" 
+                                                 update="plaagregados,pladisponibles">
+                                        <b:dataTableColumn value="#{platillo.nombre}" label="Disponibles"/>
+                                    </b:dataTable>
+                                    <b:dataTable value="#{pedidoBean.plaAgregados}" var="plaped" id="plaagregados"
+                                                 styleClass="table table-striped table-bordered" select="true" selection-mode="simple"
+                                                 onselect="ajax:pedidoBean.eliminarPlatilloaPedido(plaped)" update="plaagregados,pladisponibles">
+                                        <b:dataTableColumn value="#{plaped.nombre}" label="Agregados"/>
+                                    </b:dataTable>
+                                </b:panelGrid>
+                                <f:facet name="footer">
+                                    <b:button value="Close" dismiss="modal"/>
+                                    <b:button value="Okey" look="primary" dismiss="modal"/>
+                                </f:facet>
+                            </b:modal>
+
+                        </h:panelGrid>
+                        <br/>
+                        <h:panelGrid styleClass="container">
+                            <b:dataTable value="#{pedidoBean.pedidos}" var="pedido" id="PedidoPool" styleClass="table table-striped table-bordered"
+                                         select="true" selection-mode="simple"
+                                         onselect="ajax:pedidoBean.onSelect(pedido);" 
+                                         ondeselect="ajax:pedidoBean.onDeselect();" update="botones,panelinput">
+                                <b:dataTableColumn value="#{pedido.id}" label="ID"/>
+                                <b:dataTableColumn value="#{pedido.idPersona}" label="ID Persona"/>
+                                <b:dataTableColumn value="#{pedido.fecha}" label="Fecha:"/>
+                            </b:dataTable> 
+                        </h:panelGrid>
                     </h:panelGrid>
                 </h:form>
-
-                <b:dataTable value="#{pedidoBean.pedidos}" var="pedido" id="PedidoPool" styleClass="table table-striped table-bordered"
-                             select="true" selection-mode="simple"
-                             onselect="ajax:pedidoBean.onSelect(pedido);" 
-                             ondeselect="ajax:pedidoBean.onDeselect();" update="formulario">
-                    <b:dataTableColumn value="#{pedido.id}" label="ID"/>
-                    <b:dataTableColumn value="#{pedido.idPersona}" label="ID Persona"/>
-                    <b:dataTableColumn value="#{pedido.fecha}" label="Fecha:"/>
-                </b:dataTable>
-
             </ui:define>
         </ui:composition>
     </h:body>
